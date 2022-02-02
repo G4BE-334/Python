@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import random
 from matplotlib import widgets
 from projection import Quaternion, project_points
 
@@ -259,6 +260,8 @@ class InteractiveCube(plt.Axes):
                          size=10)
 
     def _initialize_widgets(self):
+        # Create buttons
+        
         self._ax_reset = self.figure.add_axes([0.75, 0.05, 0.2, 0.075])
         self._btn_reset = widgets.Button(self._ax_reset, 'Reset View')
         self._btn_reset.on_clicked(self._reset_view)
@@ -270,6 +273,10 @@ class InteractiveCube(plt.Axes):
         self._ax_tutorial = self.figure.add_axes([0.75, 0.125, 0.2, 0.075])
         self._btn_tutorial = widgets.Button(self._ax_tutorial, 'Start Tutorial')
         self._btn_tutorial.on_clicked(self._start_tutorial)
+
+        self._ax_tutorial = self.figure.add_axes([0.55, 0.125, 0.2, 0.075])
+        self._btn_tutorial = widgets.Button(self._ax_tutorial, 'Scramble Cube')
+        self._btn_tutorial.on_clicked(self._scramble_cube)
         
     def _project(self, pts):
         return project_points(pts, self._current_rot, self._view, [0, 1, 0])
@@ -335,9 +342,16 @@ class InteractiveCube(plt.Axes):
             self.rotate_face(face, -n, layer, steps=3)
         self.cube._move_list = []
         
+    def _scramble_cube(self, *args):
+        moves = ['right', 'left', 'up', 'down' ]
+        x = range(20)
+        for i in x:
+            randomMove = event.key 
+            self._key_press(self, random.choice(moves))
+    
     def _start_tutorial(self, *args):
         # Work on the tutorial in the future
-        a = a
+        a = 12
 
     def _key_press(self, event):
         """Handler for key press events"""
@@ -440,7 +454,7 @@ if __name__ == '__main__':
 
     c = Cube(N)
     
-    plt.style.use('dark_background')
+    # plt.style.use('dark_background')
     c.draw_interactive()
    
     plt.show()
