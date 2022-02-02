@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+import tkinter as tk
 """
 Creation of a TicTacToe Game
 Initiate the window
@@ -17,71 +18,51 @@ mainFrm.pack()
 def ttt(buttons):
     global bclick
     if buttons["text"] == " " and bclick == True:
+        buttons["fg"] = "red"
         buttons["text"] = "X"
         bclick = False
     elif buttons["text"] == " " and bclick == False:
+        buttons['fg'] = "blue"
         buttons["text"] = "O"
         bclick = True
     CheckWinner()
 
+# Clear board function
+def clearBoard():
+    button1["text"] = " "
+    button2["text"] = " "
+    button3["text"] = " "
+    button4["text"] = " "
+    button5["text"] = " "
+    button6["text"] = " "
+    button7["text"] = " "
+    button8["text"] = " "
+    button9["text"] = " "
+    bclick = True
+
 # Checking for winner
 def CheckWinner():
-    if(button1['text'] == 'X' and button2['text'] == 'X' and button3['text'] == 'X'or
-    button4['text'] == 'X' and button5['text'] == 'X' and button6['text'] == 'X'or
-    button7['text'] == 'X' and button8['text'] == 'X' and button9['text'] == 'X'or
-    button1['text'] == 'X' and button5['text'] == 'X' and button9['text'] == 'X'or
-    button3['text'] == 'X' and button5['text'] == 'X' and button7['text'] == 'X'or
-    button1['text'] == 'X' and button2['text'] == 'X' and button3['text'] == 'X'or
-    button1['text'] == 'X' and button4['text'] == 'X' and button7['text'] == 'X'or
-    button2['text'] == 'X' and button5['text'] == 'X' and button8['text'] == 'X'or
-    button3['text'] == 'X' and button6['text'] == 'X' and button9['text'] == 'X'or
-    button7['text'] == 'X' and button8['text'] == 'X' and button9['text'] == 'X'):
-        messagebox.showinfo("Player X",'Winner is X !')
-        button1["text"] = " "
-        button2["text"] = " "
-        button3["text"] = " "
-        button4["text"] = " "
-        button5["text"] = " "
-        button6["text"] = " "
-        button7["text"] = " "
-        button8["text"] = " "
-        button9["text"] = " "
-        bclick = True
-    elif(button1['text'] == 'O' and button2['text'] == 'O' and button3['text'] == 'O'or
-    button4['text'] == 'O' and button5['text'] == 'O' and button6['text'] == 'O'or
-    button7['text'] == 'O' and button8['text'] == 'O' and button9['text'] == 'O'or
-    button1['text'] == 'O' and button5['text'] == 'O' and button9['text'] == 'O'or
-    button3['text'] == 'O' and button5['text'] == 'O' and button7['text'] == 'O'or
-    button1['text'] == 'O' and button2['text'] == 'O' and button3['text'] == 'O'or
-    button1['text'] == 'O' and button4['text'] == 'O' and button7['text'] == 'O'or
-    button2['text'] == 'O' and button5['text'] == 'O' and button8['text'] == 'O'or
-    button3['text'] == 'O' and button6['text'] == 'O' and button9['text'] == 'O'or
-    button7['text'] == 'O' and button8['text'] == 'O' and button9['text'] == 'O'):
-        messagebox.showinfo("Player O",'Winner is O !')
-        button1["text"] = " "
-        button2["text"] = " "
-        button3["text"] = " "
-        button4["text"] = " "
-        button5["text"] = " "
-        button6["text"] = " "
-        button7["text"] = " "
-        button8["text"] = " "
-        button9["text"] = " "
-        bclick = True
+    if(button1['text'] == button2['text'] == button3['text'] != ' ' or
+    button4['text'] == button5['text'] == button6['text'] != ' ' or
+    button7['text'] == button8['text'] == button9['text'] != ' ' or
+    button1['text'] == button5['text'] == button9['text'] != ' ' or
+    button3['text'] == button5['text'] == button7['text'] != ' ' or
+    button1['text'] == button2['text'] == button3['text'] != ' ' or
+    button1['text'] == button4['text'] == button7['text'] != ' ' or
+    button2['text'] == button5['text'] == button8['text'] != ' ' or
+    button3['text'] == button6['text'] == button9['text'] != ' ' or
+    button7['text'] == button8['text'] == button9['text'] != ' '):
+        if bclick:
+            messagebox.showinfo("Player O",'Winner is O !')
+        else:
+            messagebox.showinfo("Player X",'Winner is X !')
+        clearBoard()
     elif(button1['text'] != ' ' and button2['text'] != ' ' and button3['text'] != ' ' and
     button4['text'] != ' ' and button5['text'] != ' ' and button6['text'] != ' ' and
     button7['text'] != ' ' and button8['text'] != ' ' and button9['text'] != ' '):
         messagebox.showinfo("No winners","That's a tie!")
-        button1["text"] = " "
-        button2["text"] = " "
-        button3["text"] = " "
-        button4["text"] = " "
-        button5["text"] = " "
-        button6["text"] = " "
-        button7["text"] = " "
-        button8["text"] = " "
-        button9["text"] = " "
-        bclick = True
+        clearBoard()
+
 
 
 # Buttons and the colors to change
